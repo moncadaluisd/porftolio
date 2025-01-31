@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CategoriesNav from "../components/blog/CategoriesNav.astro";
+import ItemPost from "../components/blog/ItemPost.astro";
+import HeaderLanding from "../components/HeaderLanding.astro";
+import BreadCumb from "../components/BreadCumb.astro";
+
+import { getCollection } from "astro:content";
+
+
+
+const posts = await getCollection("blog");
+
+ console.log(posts);
+---
+
+<Layout>
+  <HeaderLanding />
+
+  <BreadCumb />
+  <div class="mt-12">
+    <h2 class="text-5xl text-gray-800 font-playfair tracking-light font-bold">
+      Blogs
+    </h2>
+
+    <CategoriesNav currentText="all" />
+
+    <div class="mt-12">
+      {
+        posts.map((post: any) => (
+          <ItemPost
+            title={post.data.title}
+            shortDescription={post.shortDescription}
+            date={post.data.date}
+            slugData={"/blog/post/" + post.slug}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>

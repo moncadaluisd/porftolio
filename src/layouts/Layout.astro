@@ -1,3 +1,7 @@
+---
+import { ClientRouter } from 'astro:transitions';
+
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,20 +9,21 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<ClientRouter />
+		<title>Luis Moncada ~ Software Developer Full Stack</title>
 		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
 	</head>
-	<body class="bg-gradient-to-b from-zinc-100  to-zinc-200 max-w-5xl mx-auto px-4 h-full">
+	<body class=" max-w-5xl mx-auto px-4 h-full min-h-full">
 		<slot />
 	</body>
 </html>
 
 <style>
-	html,
-	body {
+	html {
 		margin: 0;
 		width: 100%;
 		background: linear-gradient(to bottom, #f4f4f5, #e4e4e7);
+		min-height: 100%;
 	}
 </style>
