@@ -1,0 +1,25 @@
+---
+const {
+  title = "This is the first blog post",
+  shortDescription = "This is the first blog post.",
+  date = "2021-09-01",
+  categories = "all",
+  slugData,
+} = Astro.props;
+---
+
+<div class="mt-8 flex justify-between border-b border-gray-500 pb-5">
+ <a href={slugData}>
+    <div>
+        <h3 class="text-lg text-gray-800 font-playfair tracking-tight">{title}</h3>
+        <p class="font-inter text-sm text-gray-900">{shortDescription}</p>
+      </div>
+    
+      <div>
+        <a href="#" class="text-gray-500 hover:underline">Read more</a>
+        <p class="text-sm text-gray-500">
+          <span class="text-gray-700"> {date}</span>
+        </p>
+      </div>
+ </a>
+</div>

@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import HeaderLanding from "../../../components/HeaderLanding.astro";
+import BreadCumb from "../../../components/BreadCumb.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+console.log(slug);
+const posts = await getCollection("blog");
+const post = posts.find((p) => p.slug === slug);
+
+if (!post) {
+  throw new Error("Post no encontrado");
+}
+
+const  { Content } = await render(post)
+---
+
+<Layout>
+  <HeaderLanding />
+  <BreadCumb
+    items={[
+      {
+        label: "Home",
+        href: "/",
+      },
+      {
+        label: "Blog",
+        href: "/blog",
+      },
+      {
+        label: post.data.title,
+        href: "#",
+      },
+    ]}
+  />
+  <div class="mt-12">
+    <h2 class="text-3xl text-gray-800 font-playfair tracking-light font-bold">
+      {post.data.title}
+    </h2>
+  </div>
+  <small>{new Date(post.data.date).toLocaleDateString()}</small>
+  <article class="mt-12 w-full prose prose-h1:font-playfair prose-h1:text-gray-800 prose:max-w-full prose:w-full">
+    <Content />
+  </article>
+</Layout>

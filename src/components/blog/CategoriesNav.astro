@@ -1,0 +1,17 @@
+---
+const { currentText = "" } = Astro.props;
+
+function isCurrentClass(currentText: string, category: string) {
+  return currentText === category
+    ? "bg-zinc-700 text-gray-100 px-4 shadow-md"
+    : "text-gray-800 hover:text-gray-600";
+}
+---
+
+<nav class="flex justify-center space-x-4 font-playfair mt-12 hidden">
+  <a href="/blog" class={isCurrentClass(currentText, "all")}>All</a>
+  <a href="/blog/categories/frontend" class={isCurrentClass(currentText, "frontend")}>Frontend</a>
+  <a href="/blog/categories/backend" class={isCurrentClass(currentText, "backend")}>Backend</a>
+  <a href="/blog/categories/devops" class={isCurrentClass(currentText, "devops")}>Devops</a>
+  <a href="/blog/categories/lifestyle" class={isCurrentClass(currentText, "lifestyle")}>LifeStyle</a>
+</nav>
