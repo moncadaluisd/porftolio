@@ -1,7 +1,12 @@
 ---
 import ItemPost from "./blog/ItemPost.astro";
 
+import { getCollection } from "astro:content";
 
+const posts = await getCollection("blog");
+const maxPosts = 3;
+
+const postsToShow = posts.slice(0, maxPosts);
 ---
 
 <div class="mt-12">
@@ -10,10 +15,16 @@ import ItemPost from "./blog/ItemPost.astro";
   </h2>
 
   <div>
-
-    <ItemPost />
-    <ItemPost />
-    <ItemPost />
+    {
+      postsToShow.map((post: any) => (
+        <ItemPost
+          title={post.data.title}
+          shortDescription={post.shortDescription}
+          date={post.data.date}
+          slugData={"/blog/post/" + post.slug}
+        />
+      ))
+    }
   </div>
 
   <div class="text-center mt-8">
