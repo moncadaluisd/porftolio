@@ -1,15 +1,40 @@
 ---
 import { Image } from "astro:assets";
-import Calendar from "../../assets/screenshots/schedule/Calendar.png";
----
-<div class="w-full mt-6 bg-transparent block md:flex">
-    <Image class={"w-auto h-44 md:h-52 grayscale"} src={Calendar} alt="Schedule App System" />
-    <div class="mt-2 md:mt-0 ml-0 md:ml-4">
-        <h2 class="font-playfair text-gray-700 text-2xl">
-                Schedule System App
-        </h2>
-        <span class="border border-zinc-700 rounded text-gray-700 font-playfair text-xs px-2 pb-0.5">open-source</span>
+import type { ImageMetadata } from "astro";
 
-        <p class="mt-2 text-sm font-inter text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod magnam dolore minima! Sequi autem pariatur possimus </p>
+const { title, shortDescription, image, category, slugData } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/screenshots/**/*.{jpeg,jpg,png,gif}"
+);
+
+if (!images[image])
+  throw new Error(
+    `"${image}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`
+  );
+---
+
+<a href={slugData}>
+  <div class="w-full mt-6 bg-transparent block md:flex">
+    <Image
+      class={"w-auto h-44 md:h-52 grayscale"}
+      src={images[image]()}
+      width={800}
+      height={600}
+      alt="Schedule App System"
+    />
+    <div class="mt-2 md:mt-0 ml-0 md:ml-4">
+      <h2 class="font-playfair text-gray-700 text-2xl">
+        {title}
+      </h2>
+      <span
+        class="border border-zinc-700 rounded text-gray-700 font-playfair text-xs px-2 pb-0.5"
+        >{category}</span
+      >
+
+      <p class="mt-2 text-sm font-inter text-gray-600">
+        {shortDescription}
+      </p>
     </div>
-</div>
+  </div>
+</a>

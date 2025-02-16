@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ItemProject from "../components/projects/ItemProject.astro";
+import HeaderLanding from "../components/HeaderLanding.astro";
+import BreadCumb from "../components/BreadCumb.astro";
+
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+---
+
+<Layout>
+  <HeaderLanding />
+
+  <BreadCumb />
+  <div class="mt-12">
+    <h2 class="text-5xl text-gray-800 font-playfair tracking-light font-bold">
+      Projects
+    </h2>
+
+    <div class="mt-12">
+      {
+        projects.map((project) => (
+          <ItemProject
+            title={project.data.title}
+            shortDescription={project.data.shortDescription}
+            date={project.data.date}
+            category={project.data.category}
+            image={project.data.image}
+            slugData={"/projects/" + project.slug}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>

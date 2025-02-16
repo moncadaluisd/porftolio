@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import HeaderLanding from "../../components/HeaderLanding.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const projects = await getCollection("projects");
+const project = projects.find((p) => p.slug === slug);
+
+if (!project) {
+  throw new Error("Post no encontrado");
+}
+
+const { Content } = await render(project);
+---
+
+<Layout>
+  <HeaderLanding />
+  <div class="mt-12">
+    <h2 class="text-3xl text-gray-800 font-playfair tracking-light font-bold">
+      {project.data.title}
+    </h2>
+  </div>
+  <p>Date: <span class="font-playfair ml-2">{new Date(project.data.date).toLocaleDateString()}</span></p>
+  <article
+    class="mt-12 w-full prose prose-h1:font-playfair prose-p:font-playfair prose-h1:text-gray-800 prose-w-full prose-p:text-gray-800 prose-p:text-md prose-p:w-full prose-p:text-justify max-w-full"
+  >
+    <Content />
+  </article>
+
+  <Footer />
+</Layout>

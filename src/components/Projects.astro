@@ -1,5 +1,12 @@
 ---
-import ItemProject from "./projects/ItemProject.astro"
+import ItemProject from "./projects/ItemProject.astro";
+
+import { getCollection } from "astro:content";
+
+const projects = await getCollection("projects");
+const maxProjects = 3;
+
+const projectsToShow = projects.slice(0, maxProjects);
 ---
 
 <div class="mt-12">
@@ -8,11 +15,18 @@ import ItemProject from "./projects/ItemProject.astro"
   </h2>
 
   <div class="mt-4">
-
-   <ItemProject />
-   <ItemProject />
-   <ItemProject />
-
+    {
+      projectsToShow.map((project) => (
+        <ItemProject
+          title={project.data.title}
+          shortDescription={project.data.shortDescription}
+          date={project.data.date}
+          category={project.data.category}
+          image={project.data.image}
+          slugData={"/projects/" + project.slug}
+        />
+      ))
+    }
   </div>
 
   <div class="text-center mt-8">
