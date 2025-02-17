@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import HeaderLanding from "../../../components/HeaderLanding.astro";
 import BreadCumb from "../../../components/BreadCumb.astro";
+import Footer from "../../../components/Footer.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -21,7 +22,7 @@ if (!post) {
   throw new Error("Post no encontrado");
 }
 
-const  { Content } = await render(post)
+const { Content } = await render(post);
 ---
 
 <Layout>
@@ -47,8 +48,12 @@ const  { Content } = await render(post)
       {post.data.title}
     </h2>
   </div>
-  <small>{new Date(post.data.date).toLocaleDateString()}</small>
-  <article class="mt-12 w-full prose prose-h1:font-playfair prose-h1:text-gray-800 prose:max-w-full prose:w-full">
+  <p>Date: <span class="font-playfair ml-2">{new Date(post.data.date).toLocaleDateString()}</span></p>
+  <article
+    class="mt-12 w-full prose prose-h1:font-playfair prose-p:font-playfair prose-h1:text-gray-800 prose-w-full prose-p:text-gray-800 prose-p:text-md prose-p:w-full prose-p:text-justify max-w-full"
+  >
     <Content />
   </article>
+
+  <Footer />
 </Layout>

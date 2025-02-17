@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import HeaderLanding from "../../components/HeaderLanding.astro";
 import Footer from "../../components/Footer.astro";
-
+import BreadCumb from "../../components/BreadCumb.astro";
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
@@ -26,6 +26,22 @@ const { Content } = await render(project);
 
 <Layout>
   <HeaderLanding />
+  <BreadCumb
+  items={[
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "projects",
+      href: "/projects",
+    },
+    {
+      label: project.data.title,
+      href: "#",
+    },
+  ]}
+/>
   <div class="mt-12">
     <h2 class="text-3xl text-gray-800 font-playfair tracking-light font-bold">
       {project.data.title}
