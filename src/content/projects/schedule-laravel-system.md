@@ -34,10 +34,10 @@ Github: [Schedule Laravel System](https://github.com/moncadaluisd/schedule-studi
 
 ## Screenshots
 
-![Calendar](/src/assets/screenshots/schedule/Calendar.png)
-![Appointment](/src/assets/screenshots/schedule/Dashboard.png)
-![Cart](/src/assets/screenshots/schedule/Cart.png)
-![DashboardUser](/src/assets/screenshots/schedule/DashboardUser.png)
-![Landing](/src/assets/screenshots/schedule/Landing.png)
-![Information](/src/assets/screenshots/schedule/Information.png)
+![Calendar](../../assets/screenshots/schedule/Calendar.png)
+![Appointment](../../assets/screenshots/schedule/Dashboard.png)
+![Cart](../../assets/screenshots/schedule/Cart.png)
+![DashboardUser](../../assets/screenshots/schedule/DashboardUser.png)
+![Landing](../../assets/screenshots/schedule/Landing.png)
+![Information](../../assets/screenshots/schedule/Information.png)
 
