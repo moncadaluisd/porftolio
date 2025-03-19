@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
-
+import Analytics from '@vercel/analytics/astro'
 ---
 <!doctype html>
 <html lang="en">
@@ -16,6 +16,7 @@ import { ClientRouter } from 'astro:transitions';
 	</head>
 	<body class=" max-w-5xl mx-auto px-4 h-full min-h-full">
 		<slot />
+		<Analytics />
 	</body>
 </html>
 
